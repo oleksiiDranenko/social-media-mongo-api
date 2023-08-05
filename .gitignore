@@ -1,0 +1,21 @@
+# Dependency directories
+node_modules/
+
+# Environment variables and configuration files
+.env
+config/*.env
+
+# Build output
+build/
+dist/
+out/
+*.log
+*.pid
+*.map
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+
+
+package-lock.json
