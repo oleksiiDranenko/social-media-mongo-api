@@ -5,4 +5,4 @@ const UserSchema = new Schema({
     password: { type: String, required: true }
 })
 
-export const UserModel = mongoose.Model('user', UserSchema)
+export const UserModel = mongoose.model('user', UserSchema)
