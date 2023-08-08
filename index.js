@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 // routes
 import { userRouter } from './routes/user.js';
+import { postsRouter } from './routes/posts.js';
 
 
 const app = express()
@@ -13,6 +14,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/user', userRouter)
+app.use('/posts', postsRouter)
 
 
 // taking variable from .env file
