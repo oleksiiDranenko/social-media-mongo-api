@@ -1,10 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 
 const UserSchema = new Schema({
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-  },
-  { versionKey: false }
+    	username: { type: String, required: true, unique: true },
+    	password: { type: String, required: true },
+  	},
+  	{ versionKey: false }
 )
 
 export const UserModel = mongoose.model('users', UserSchema)
