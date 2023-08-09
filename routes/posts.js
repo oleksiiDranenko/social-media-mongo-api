@@ -68,3 +68,23 @@ postsRouter.post('/add', async (req, res) => {
         })
     }
 })
+
+
+// PATCH
+
+postsRouter.patch('/edit/:postId', async (req, res) => {
+    const { postId } = req.params;
+    const { value } = req.body;
+
+    try {
+        const post = await PostModel.findById(postId)
+        post.value = value;
+        post.save()
+        res.json(post)
+    }
+    catch {
+        res.json({
+            error: "Unable to edit the post"
+        })
+    }
+})
