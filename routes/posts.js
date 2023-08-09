@@ -38,7 +38,7 @@ postsRouter.get('/get-one/:postId', async (req, res) => {
 // POST
 
 postsRouter.post('/add', async (req, res) => {
-    const { username, userId, value } = req.body;
+    const { username, userId, value, img } = req.body;
 
     try {
         const currentDate = new Date();
@@ -51,16 +51,30 @@ postsRouter.post('/add', async (req, res) => {
         };
         const formattedDate = currentDate.toLocaleDateString('en-US', options).replace(',', '')
 
-        const newPost = new PostModel({
-            userId,
-            username,
-            value,
-            date: formattedDate
-        })
-
-        newPost.save()
-
-        res.json(newPost)
+        if (img) {
+            const newPost = new PostModel({
+                userId,
+                username,
+                value,
+                img,
+                date: formattedDate
+            })
+    
+            newPost.save()
+    
+            res.json(newPost)
+        } else {
+            const newPost = new PostModel({
+                userId,
+                username,
+                value,
+                date: formattedDate
+            })
+    
+            newPost.save()
+    
+            res.json(newPost)
+        }
     }
     catch {
         res.json({

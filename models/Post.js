@@ -4,7 +4,8 @@ const PostSchema = new Schema({
     	username: { type: String, required: true },
     	userId: { type: String, required: true },
     	value: { type: String, required: true },
-    	date: { type: String, required: true },
+    	img: { type: String, required: false },
+    	date: { type: String, required: true }
   	},
   	{ versionKey: false }
 )
