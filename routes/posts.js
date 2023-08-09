@@ -61,7 +61,6 @@ postsRouter.post('/add', async (req, res) => {
             })
     
             newPost.save()
-    
             res.json(newPost)
         } else {
             const newPost = new PostModel({
@@ -72,7 +71,6 @@ postsRouter.post('/add', async (req, res) => {
             })
     
             newPost.save()
-    
             res.json(newPost)
         }
     }
@@ -93,6 +91,9 @@ postsRouter.patch('/edit/:postId', async (req, res) => {
     try {
         const post = await PostModel.findById(postId)
         post.value = value;
+
+        if (!post.edited) post.edited = true;
+        
         post.save()
         res.json(post)
     }

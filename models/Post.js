@@ -5,7 +5,8 @@ const PostSchema = new Schema({
     	userId: { type: String, required: true },
     	value: { type: String, required: true },
     	img: { type: String, required: false },
-    	date: { type: String, required: true }
+    	date: { type: String, required: true },
+		edited: { type: Boolean, required: false }
   	},
   	{ versionKey: false }
 )
