@@ -103,3 +103,22 @@ postsRouter.patch('/edit/:postId', async (req, res) => {
         })
     }
 })
+
+
+// DELETE
+
+postsRouter.delete('/delete/:postId', async (req, res) => {
+    const { postId } = req.params;
+
+    try {
+        await PostModel.findByIdAndDelete(postId)
+        res.json({
+            message: "Post was successfully deleted"
+        })
+    }
+    catch {
+        res.json({
+            error: "Unable to delete the post"
+        })
+    }
+})
