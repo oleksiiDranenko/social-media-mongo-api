@@ -70,12 +70,44 @@ userRouter.patch('/change-avatar/:userId', async (req, res) => {
     const { avatar } = req.body;
 
     try {
-        const user = await UserModel.findByIdAndUpdate(userId, { avatar: avatar }, { new: true });
-        res.json(user)
+        await UserModel.findByIdAndUpdate(userId, { avatar: avatar }, { new: true });
+        res.json({
+            message: "Avatar was updated successfully"
+        })
     }
     catch {
         res.json({
             error: "Unable to change the avatar"
+        })
+    }
+})
+
+userRouter.patch('/change-password/:userId', async (req, res) => {
+    const { userId } = req.params;
+    const { password, newPassword } = req.body;
+
+    try {
+        const user = await UserModel.findById(userId)
+        const isPasswordCorrect = await bcrypt.compare(password, user.password)
+
+        if (isPasswordCorrect) {
+            const hashedPassword = await bcrypt.hash(newPassword, 5)
+
+            user.password = hashedPassword;
+            user.save()
+            
+            res.json({
+                message: "Password was successfully changed"
+            })
+        } else {
+            res.json({
+                error: "The password is not correct"
+            })
+        }
+    }
+    catch {
+        res.json({
+            error: "Unable to change the password"
         })
     }
 })
