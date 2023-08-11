@@ -8,8 +8,10 @@ import { UserModel } from '../models/User.js'
 export const userRouter = express.Router()
 
 
+// POST
+
 userRouter.post('/register', async (req, res) => { 
-    const { username, password } = req.body;
+    const { username, password, avatar } = req.body;
 
     const user = await UserModel.findOne({ username })
 
@@ -21,7 +23,11 @@ userRouter.post('/register', async (req, res) => {
     else {
         const hashedPassword = await bcrypt.hash(password, 5)
 
-        const newUser = new UserModel({ username, password: hashedPassword })
+        const newUser = new UserModel({ 
+            username, 
+            password: hashedPassword,
+            avatar
+        })
         await newUser.save()
 
         res.json(newUser) 
@@ -53,5 +59,23 @@ userRouter.post('/log-in', async (req, res) => {
                 userId: user._id
             })
         }
+    }
+})
+
+
+// PATCH
+
+userRouter.patch('/change-avatar/:userId', async (req, res) => {
+    const { userId } = req.params;
+    const { avatar } = req.body;
+
+    try {
+        const user = await UserModel.findByIdAndUpdate(userId, { avatar: avatar }, { new: true });
+        res.json(user)
+    }
+    catch {
+        res.json({
+            error: "Unable to change the avatar"
+        })
     }
 })
