@@ -26,7 +26,8 @@ userRouter.post('/register', async (req, res) => {
         const newUser = new UserModel({ 
             username, 
             password: hashedPassword,
-            avatar
+            avatar,
+            about: ""
         })
         await newUser.save()
 
@@ -94,7 +95,7 @@ userRouter.patch('/change-password/:userId', async (req, res) => {
             const hashedPassword = await bcrypt.hash(newPassword, 5)
 
             user.password = hashedPassword;
-            user.save()
+            await user.save()
             
             res.json({
                 message: "Password was successfully changed"
@@ -108,6 +109,25 @@ userRouter.patch('/change-password/:userId', async (req, res) => {
     catch {
         res.json({
             error: "Unable to change the password"
+        })
+    }
+})
+
+userRouter.patch('/edit-about/:userId', async (req, res) => {
+    const { userId } = req.params;
+    const { about } = req.body; 
+
+    try {
+        const user = await UserModel.findById(userId)
+
+        user.about = about;
+        await user.save()
+
+        res.json(user)
+    }
+    catch {
+        res.json({
+            error: "Unable to change the about page"
         })
     }
 })
