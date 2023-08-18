@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 // routes
 import { userRouter } from './routes/user.js';
 import { postsRouter } from './routes/posts.js';
+import { likesRouter } from './routes/likes.js';
 
 
 const app = express()
@@ -15,6 +16,7 @@ app.use(express.json())
 
 app.use('/user', userRouter)
 app.use('/posts', postsRouter)
+app.use('/likes', likesRouter)
 
 
 // taking variable from .env file
