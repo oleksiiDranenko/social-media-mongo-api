@@ -25,6 +25,20 @@ likesRouter.get('/post-likes-count/:postId', async (req, res) => {
     }
 })
 
+likesRouter.get('/user-liked-posts/:userId', async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const likedPosts = await LikesModel.find({ userId })
+        res.json(likedPosts)
+    }
+    catch {
+        res.json({
+            error: "Unalble to load user liked posts"
+        })
+    }
+})
+
 
 // POST
 
