@@ -60,7 +60,7 @@ postsRouter.post('/add', async (req, res) => {
                 date: formattedDate
             })
     
-            newPost.save()
+            await newPost.save()
             res.json(newPost)
         } else {
             const newPost = new PostModel({
@@ -94,7 +94,7 @@ postsRouter.patch('/edit/:postId', async (req, res) => {
 
         if (!post.edited) post.edited = true;
         
-        post.save()
+        await post.save()
         res.json(post)
     }
     catch {
