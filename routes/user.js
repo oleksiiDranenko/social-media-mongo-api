@@ -26,8 +26,7 @@ userRouter.post('/register', async (req, res) => {
         const newUser = new UserModel({ 
             username, 
             password: hashedPassword,
-            avatar,
-            about: ""
+            avatar
         })
         await newUser.save()
 

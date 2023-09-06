@@ -4,7 +4,7 @@ const UserSchema = new Schema({
     	username: { type: String, required: true, unique: true },
     	password: { type: String, required: true },
     	avatar: { type: Number, required: true },
-		about: { type: String, required: true }
+		about: { type: String, default: "" }
   	},
   	{ versionKey: false }
 )
