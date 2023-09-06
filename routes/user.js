@@ -8,6 +8,28 @@ import { UserModel } from '../models/User.js'
 export const userRouter = express.Router()
 
 
+// GET
+
+userRouter.get('/get/:userId', async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const user = await UserModel.findById(userId)
+
+        if (user) {
+            res.json(user)
+        } else {
+            res.json({
+                error: 'User doesnt exist'
+            })
+        }
+    } catch {
+        res.json({
+            error: 'Can not find user'
+        })
+    }
+})
+
 // POST
 
 userRouter.post('/register', async (req, res) => { 
