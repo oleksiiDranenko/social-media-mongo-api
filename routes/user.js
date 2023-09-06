@@ -30,7 +30,12 @@ userRouter.post('/register', async (req, res) => {
         })
         await newUser.save()
 
-        res.json(newUser) 
+        const token = jwt.sign({ id: newUser._id }, 'secret')
+
+        res.json({
+            token,
+            userId: newUser._id
+        })
     }
 })
 
