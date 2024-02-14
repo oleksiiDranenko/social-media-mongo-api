@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 // routes
 import { userRouter } from './routes/user.js';
 import { postsRouter } from './routes/posts.js';
-import { likesRouter } from './routes/likes.js';
+import { reactionsRouter } from './routes/reactions.js';
 import { commentsRouter } from './routes/comments.js';
 
 
@@ -17,7 +17,7 @@ app.use(express.json())
 
 app.use('/user', userRouter)
 app.use('/posts', postsRouter)
-app.use('/likes', likesRouter)
+app.use('/reactions', reactionsRouter)
 app.use('/comments', commentsRouter)
 
 
