@@ -23,16 +23,30 @@ commentsRouter.get('/get-comments/:postId', async (req, res) => {
     }
 })
 
+commentsRouter.get('/get-comments-count/:postId', async (req, res) => {
+    const { postId } = req.params;
+
+    try {
+        const commentsCount = await CommentModel.countDocuments({postId})
+
+        res.json(commentsCount)
+    } catch {
+        res.json({
+            error: "Unable to load the comments count"
+        })
+    }
+})
+
 
 // POST 
 
 commentsRouter.post('/add', async (req, res) => {
-    const { username, userId, postId, value } = req.body;
+    const { username, avatar, userId, postId, value } = req.body;
 
     try{
         const currentDate = new Date();
         const options = { 
-            weekday: 'short', 
+            month: 'short', 
             day: 'numeric', 
             hour: '2-digit', 
             minute: '2-digit', 
@@ -42,6 +56,7 @@ commentsRouter.post('/add', async (req, res) => {
 
         const comment = new CommentModel({
             username,
+            avatar,
             userId,
             postId,
             value,
