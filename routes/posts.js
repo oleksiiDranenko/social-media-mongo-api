@@ -3,6 +3,7 @@ import express from 'express'
 // model
 import { PostModel } from '../models/Post.js'
 import { CommentModel } from '../models/Comment.js'
+import { ReactionsModel } from '../models/Reaction.js'
 
 export const postsRouter = express.Router()
 
@@ -132,6 +133,7 @@ postsRouter.delete('/delete/:postId', async (req, res) => {
     try {
         await PostModel.findByIdAndDelete(postId)
         await CommentModel.find({postId}).deleteMany()
+        await ReactionsModel.find({postId}).deleteMany()
 
         res.json({
             message: "Post was successfully deleted"
