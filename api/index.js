@@ -4,10 +4,10 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 // routes
-import { userRouter } from './routes/user.js';
-import { postsRouter } from './routes/posts.js';
-import { reactionsRouter } from './routes/reactions.js';
-import { commentsRouter } from './routes/comments.js';
+import { userRouter } from '../routes/user.js';
+import { postsRouter } from '../routes/posts.js';
+import { reactionsRouter } from '../routes/reactions.js';
+import { commentsRouter } from '../routes/comments.js';
 
 
 const app = express()
