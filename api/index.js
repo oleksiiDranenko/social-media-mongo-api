@@ -20,6 +20,11 @@ app.use('/posts', postsRouter)
 app.use('/reactions', reactionsRouter)
 app.use('/comments', commentsRouter)
 
+app.get('/', (req, res) => {
+    res.json({
+      message: "works"
+    })
+})
 
 // taking variable from .env file
 dotenv.config()
