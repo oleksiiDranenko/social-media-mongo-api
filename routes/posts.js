@@ -10,10 +10,6 @@ export const postsRouter = express.Router()
 
 // GET
 
-postsRouter.get('/get', (res, res) => {
-    res.json({message: "hello world"})
-})
-
 postsRouter.get('/get-all', async (req, res) => {
     try {
         const posts = await PostModel.find({})
