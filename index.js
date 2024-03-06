@@ -11,6 +11,7 @@ import { commentsRouter } from './routes/comments.js';
 
 
 const app = express()
+const PORT = process.env.PORT || 3030;
 
 app.use(cors())
 app.use(express.json())
@@ -36,6 +37,6 @@ mongoose.connect(dbConnectionString, {
 })
 
 
-app.listen(3001, () => {
-  console.log('Server is running on port 3001');
+app.listen(PORT, () => {
+  console.log('Server is running');
 })
