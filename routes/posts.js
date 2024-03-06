@@ -21,6 +21,20 @@ postsRouter.get('/get-all', async (req, res) => {
     }
 })
 
+postsRouter.get('/get-user-posts/:userId', async (req, res) => {
+    const {userId} = req.params;
+
+    try {
+        const posts = await PostModel.find({userId})
+        res.json(posts)
+    }
+    catch {
+        res.json({
+            error: "Error! Check your internet connection"
+        })
+    }
+})
+
 postsRouter.get('/get-one/:postId', async (req, res) => {
     const {postId} = req.params;
 
