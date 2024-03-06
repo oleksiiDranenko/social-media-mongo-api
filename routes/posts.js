@@ -2,6 +2,7 @@
 import express from 'express'
 // model
 import { PostModel } from '../models/Post.js'
+import { CommentModel } from '../models/Comment.js'
 
 export const postsRouter = express.Router()
 
@@ -38,7 +39,7 @@ postsRouter.get('/get-one/:postId', async (req, res) => {
 // POST
 
 postsRouter.post('/add', async (req, res) => {
-    const { username, userId, value, img } = req.body;
+    const { username, userAvatar, userId, value, img } = req.body;
 
     try {
         const currentDate = new Date();
@@ -55,9 +56,11 @@ postsRouter.post('/add', async (req, res) => {
             const newPost = new PostModel({
                 userId,
                 username,
+                userAvatar,
                 value,
                 img,
-                date: formattedDate
+                date: formattedDate,
+                edited: false
             })
     
             await newPost.save()
@@ -66,8 +69,10 @@ postsRouter.post('/add', async (req, res) => {
             const newPost = new PostModel({
                 userId,
                 username,
+                userAvatar,
                 value,
-                date: formattedDate
+                date: formattedDate,
+                edited: false
             })
     
             newPost.save()
@@ -112,6 +117,8 @@ postsRouter.delete('/delete/:postId', async (req, res) => {
 
     try {
         await PostModel.findByIdAndDelete(postId)
+        await CommentModel.find({postId}).deleteMany()
+
         res.json({
             message: "Post was successfully deleted"
         })
