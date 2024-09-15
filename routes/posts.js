@@ -59,13 +59,14 @@ postsRouter.post('/add', async (req, res) => {
     try {
         const currentDate = new Date();
         const options = { 
-            month: 'short', 
             day: 'numeric', 
-            hour: '2-digit', 
-            minute: '2-digit', 
-            hour12: false 
+            month: 'short',    
+            hour: '2-digit',
+            minute: '2-digit',  
+            hour12: false
         };
-        const formattedDate = currentDate.toLocaleDateString('en-US', options).replace(',', '')
+
+        const formattedDate = currentDate.toLocaleString('en-US', options).replace(',', '');
 
         if (img) {
             const newPost = new PostModel({
