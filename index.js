@@ -39,5 +39,3 @@ mongoose.connect(dbConnectionString, {
 app.listen(3001, () => {
   console.log('Server is running');
 })
-
-module.exports = app
