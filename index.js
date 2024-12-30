@@ -8,6 +8,7 @@ import { userRouter } from './routes/user.js';
 import { postsRouter } from './routes/posts.js';
 import { reactionsRouter } from './routes/reactions.js';
 import { commentsRouter } from './routes/comments.js';
+import { subscriptionsRouter } from './routes/subscriptions.js';
 
 
 const app = express()
@@ -19,6 +20,7 @@ app.use('/user', userRouter)
 app.use('/posts', postsRouter)
 app.use('/reactions', reactionsRouter)
 app.use('/comments', commentsRouter)
+app.use('/subscriptions', subscriptionsRouter)
 
 app.get('/', (req, res) => {
     res.json({
@@ -37,5 +39,5 @@ mongoose.connect(dbConnectionString, {
 
 
 app.listen(process.env.PORT || 3001, () => {
-  console.log(`Server is running on port ${process.env.PORT || 3000}`);
+  console.log(`Server is running on port ${process.env.PORT || 3001}`);
 });
