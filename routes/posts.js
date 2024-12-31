@@ -36,6 +36,22 @@ postsRouter.get('/get-user-posts/:userId', async (req, res) => {
     }
 })
 
+postsRouter.get('/get-user-posts-num/:userId', async (req, res) => {
+    const {userId} = req.params;
+
+    try {
+        const posts = await PostModel.count({userId})
+        res.json({
+            postsNum: posts
+        })
+    }
+    catch {
+        res.json({
+            error: "Error! Check your internet connection"
+        })
+    }
+})
+
 postsRouter.get('/get-one/:postId', async (req, res) => {
     const {postId} = req.params;
 
